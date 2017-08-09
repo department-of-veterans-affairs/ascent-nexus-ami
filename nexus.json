@@ -1,0 +1,63 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-6d1c2007",
+      "instance_type": "t2.micro",
+      "ssh_username": "centos",
+      "ssh_pty": true,
+      "ami_name": "vets-nexus {{timestamp}}",
+      "ami_block_device_mappings": [
+        {
+          "delete_on_termination": false,
+          "device_name": "/dev/sdb",
+          "volume_type": "gp2",
+          "volume_size": 500
+        }
+      ],
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 8,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        },
+        {
+          "delete_on_termination": true,
+          "device_name": "/dev/sdb",
+          "volume_type": "gp2",
+          "volume_size": 500
+        }
+      ],
+      "tags": {
+        "name": "vets-nexus"
+      },
+      "snapshot_tags": 
+      {
+        "name": "vets-nexus"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "nexus.properties",
+      "destination": "~/nexus.properties"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "mount-ebs.sh",
+        "install-java.sh",
+        "install-nexus.sh"
+      ]
+    }
+  ]
+}
