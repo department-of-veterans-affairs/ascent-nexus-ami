@@ -52,11 +52,17 @@
       "destination": "~/nexus.properties"
     },
     {
+      "type": "file",
+      "source": "githuboauth.properties",
+      "destination": "~/githuboauth.properties"
+    },
+    {
       "type": "shell",
       "scripts": [
         "mount-ebs.sh",
         "install-java.sh",
-        "install-nexus.sh"
+        "install-nexus.sh",
+        "plugin-github-oauth.sh"
       ]
     }
   ]
