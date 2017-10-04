@@ -23,6 +23,9 @@ rm nexus.tar.gz
 echo 'run_as_user="nexus"' | sudo -u nexus tee /opt/nexus/bin/nexus.rc > /dev/null
 #sudo mv ~/nexus.properties /opt/sonatype-work/nexus3/etc/nexus.properties
 #sudo chown nexus:nexus /opt/sonatype-work/nexus3/etc/nexus.properties
+sudo mv ~/nexus.vmoptions /opt/nexus/bin/nexus.vmoptions
+sudo chown nexus:nexus /opt/nexus/bin/nexus.vmoptions
+
 
 # Configure as service
 sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus

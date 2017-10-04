@@ -58,6 +58,11 @@
       "destination": "~/githuboauth.properties"
     },
     {
+      "type": "file",
+      "source": "nexus.vmoptions",
+      "destination": "~/nexus.vmoptions"
+    },
+    {
       "type": "shell",
       "scripts": [
         "mount-ebs.sh",
