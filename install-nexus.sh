@@ -4,6 +4,9 @@
 # Increase max file descriptors to more than 65,536
 echo "fs.file-max = 100000" | sudo tee --append /etc/sysctl.conf > /dev/null
 
+# Increase the max file descriptors for the nexus user
+echo "nexus - nofile 65536" | sudo tee --append /etc/security/limits.conf > /dev/null
+
 # Create nexus user
 sudo useradd -r -m nexus
 echo "export NEXUS_HOME=/opt/nexus" | sudo -u nexus tee --append ~nexus/.bashrc > /dev/null
