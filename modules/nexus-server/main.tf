@@ -19,7 +19,7 @@ resource "aws_instance" "vets_nexus" {
   key_name = "${var.key_name}"
 
   # Our Security group to allow HTTP and SSH access
-  vpc_security_group_ids = ["${aws_security_group.vets_nexus.id}"]
+  vpc_security_group_ids = ["${module.nexus_instance_security_group.security_group_id}"]
 
   # We're going to launch into the same subnet as our ELB. In a production
   # environment it's more common to have a separate private subnet for
@@ -41,7 +41,9 @@ module "nexus_instance_security_group" {
 }
 
 module "nexus_elb" {
-  source = "../security-groups/elb/"
+  source = "../nexus-elb/"
   vpc_id = "${var.vpc_id}"
-  elb_subnet_ids = ["${var.elb_subnet_ids}"]
+  elb_subnet_ids = "${var.elb_subnet_ids}"
+  nexus_instance_ids = ["${aws_instance.vets_nexus.id}"]
+  elb_cert_arn = "${var.elb_cert_arn}"
 }
