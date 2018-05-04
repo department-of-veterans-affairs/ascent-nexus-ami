@@ -22,8 +22,8 @@ resource "aws_security_group" "nexus_elb" {
 
   # outbound internet access
   egress {
-    from_port   = "${outbound_access_port}"
-    to_port     = "${outbound_access_port}"
+    from_port   = "${var.outbound_access_port}"
+    to_port     = "${var.outbound_access_port}"
     protocol    = "-1"
     cidr_blocks = ["${var.allowed_cidr_blocks}"]
   }
