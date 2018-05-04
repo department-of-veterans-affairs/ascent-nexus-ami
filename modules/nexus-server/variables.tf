@@ -16,7 +16,7 @@ variable "instance_subnet_id" {
 }
 
 variable "elb_subnet_ids" {
-    description = "ID for the subnet to deploy the ELB into"
+    description = "IDs for the subnet to deploy the ELB into"
     type = "list"
 }
 
