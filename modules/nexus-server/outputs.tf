@@ -1,5 +1,3 @@
-
-
 output "elb_ip" {
-  value = "${aws_elb.nexus.dns_name}"
+  value = "${module.nexus_elb.elb_dns}"
 }
