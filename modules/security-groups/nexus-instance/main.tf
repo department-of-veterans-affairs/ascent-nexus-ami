@@ -14,8 +14,8 @@ resource "aws_security_group" "vets_nexus" {
 
   # Docker repository connector ports
   ingress {
-    from_port   = "${docker_lower_bound_port}"
-    to_port     = "${docker_upper_bound_port}"
+    from_port   = "${var.docker_lower_bound_port}"
+    to_port     = "${var.docker_upper_bound_port}"
     protocol    = "tcp"
     security_groups = ["${var.elb_security_group_ids}"]
   }
