@@ -1,6 +1,6 @@
--Xms2703M
--Xmx2703M
--XX:MaxDirectMemorySize=2703M
+-Xms4g
+-Xmx4g
+-XX:MaxDirectMemorySize=4g
 -XX:+UnlockDiagnosticVMOptions
 -XX:+UnsyncloadClass
 -XX:+LogVMOutput
