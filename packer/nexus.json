@@ -4,7 +4,8 @@
     "aws_secret_key": "",
     "aws_region": "",
     "subnet_id": "",
-    "vpc_id": ""
+    "vpc_id": "",
+    "ami_version": "{{timestamp}}"
   },
   "builders": [
     {
@@ -19,7 +20,7 @@
       "associate_public_ip_address": true,
       "ssh_username": "ec2-user",
       "ssh_pty": true,
-      "ami_name": "ascent-nexus {{timestamp}}",
+      "ami_name": "ascent-nexus-{{user `ami_version`}}",
       "ami_block_device_mappings": [
         {
           "delete_on_termination": false,
