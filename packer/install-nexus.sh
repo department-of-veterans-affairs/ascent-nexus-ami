@@ -12,7 +12,7 @@ sudo useradd -r -m nexus
 echo "export NEXUS_HOME=/opt/nexus" | sudo -u nexus tee --append ~nexus/.bashrc > /dev/null
 
 # Install Nexus
-curl -L -o nexus.tar.gz http://download.sonatype.com/nexus/3/nexus-3.8.0-02-unix.tar.gz
+curl -L -o nexus.tar.gz http://download.sonatype.com/nexus/3/nexus-3.12.0-01-unix.tar.gz
 tar -xzf nexus.tar.gz
 sudo mv nexus-* /opt/nexus
 sudo mv sonatype-work/* /opt/sonatype-work
