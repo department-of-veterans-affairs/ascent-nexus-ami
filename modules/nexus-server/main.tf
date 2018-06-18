@@ -1,20 +1,10 @@
 resource "aws_instance" "nexus" {
   instance_type = "${var.instance_type}"
 
-  # Lookup the correct AMI based on the region
-  # we specified
   ami = "${var.ami_id}"
-
-  key_name = "${var.key_name}"
-
-  # Our Security group to allow HTTP and SSH access
+  key_name = "${var.ssh_key_name}"
   vpc_security_group_ids = ["${aws_security_group.nexus.id}"]
-
-  # We're going to launch into the same subnet as our ELB. In a production
-  # environment it's more common to have a separate private subnet for
-  # backend instances.
-  subnet_id = "${var.instance_subnet_id}"
-
+  subnet_id = "${var.subnet_id}"
   tags = "${merge(var.tags, map("Name", "${var.name}"))}"
 }
 
@@ -46,7 +36,10 @@ resource "aws_security_group_rule" "allow_all_outbound" {
 }
 
 module "nexus_instance_security_group" {
-  source            = "../nexus_security_rules"
+  source            = "../nexus-security-rules"
   vpc_id            = "${var.vpc_id}"
   security_group_id = "${aws_security_group.nexus.id}"
+
+  allowed_inbound_cidr_blocks = ["${var.allowed_inbound_cidr_blocks}"]
+  allowed_inbound_security_groups = ["${var.allowed_inbound_security_groups}"],
 }

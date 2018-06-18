@@ -11,11 +11,11 @@ variable "ami_id" {
   description = "ID for the AMI to launch the instance as"
 }
 
-variable "instance_subnet_id" {
+variable "subnet_id" {
   description = "ID for the subnet to deploy the Nexus server into"
 }
 
-variable "key_name" {
+variable "ssh_key_name" {
   description = "Desired name of AWS key pair"
 }
 
@@ -37,4 +37,27 @@ variable "tags" {
   description = "Tags to apply to the EC2 instance. Name will be applied by default."
   type        = "map"
   default     = {}
+}
+
+variable "allowed_ssh_cidr_blocks" {
+  description = "List of CIDR blocks to allow SSH access to instance"
+  type        = "list"
+  default     = []
+}
+
+variable "allowed_inbound_cidr_blocks" {
+  description = "List of CIDR blocks to allow access to Nexus"
+  type        = "list"
+  default     = []
+}
+
+variable "allowed_inbound_security_groups" {
+  description = "List of security groups to allow access to Nexus"
+  type        = "list"
+  default     = []
+}
+
+variable "ssh_port" {
+  description = "Port to use for SSH connection to instance"
+  default     = 22
 }
