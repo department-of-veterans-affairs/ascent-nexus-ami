@@ -2,7 +2,10 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "aws_region": "us-gov-west-1"
+    "aws_region": "",
+    "subnet_id": "",
+    "vpc_id": "",
+    "ami_version": "{{timestamp}}"
   },
   "builders": [
     {
@@ -10,11 +13,14 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "{{user `aws_region`}}",
-      "source_ami": "ami-1fbe067e",
+      "source_ami_filter": { "filters": { "name": "ascent-base-*" }, "most_recent": true },
       "instance_type": "t2.micro",
+      "vpc_id": "{{user `vpc_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "associate_public_ip_address": true,
       "ssh_username": "ec2-user",
       "ssh_pty": true,
-      "ami_name": "ascent-nexus {{timestamp}}",
+      "ami_name": "ascent-nexus-{{user `ami_version`}}",
       "ami_block_device_mappings": [
         {
           "delete_on_termination": false,

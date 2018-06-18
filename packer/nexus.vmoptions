@@ -1,6 +1,6 @@
--Xms4g
--Xmx4g
--XX:MaxDirectMemorySize=4g
+-Xms3g
+-Xmx3g
+-XX:MaxDirectMemorySize=3g
 -XX:+UnlockDiagnosticVMOptions
 -XX:+UnsyncloadClass
 -XX:+LogVMOutput
